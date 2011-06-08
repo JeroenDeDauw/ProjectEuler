@@ -5,6 +5,8 @@ Created on Jun 8, 2011
 
 @licence GNU GPL v3+
 @author: Jeroen De Dauw < jeroendedauw@gmail.com >
+
+http://projecteuler.net/index.php?section=problems&id=3
 '''
 
 def isPrime( number ):
