@@ -10,21 +10,15 @@ http://projecteuler.net/index.php?section=problems&id=7
 '''
 from Crypto.Util.number import isPrime
 
-#def isPrime( number ):
-#    for i in range( 2, number ):
-#        if number % i:
-#            return False
-#    return True
-
 def findNthPrime( n ):
     currentCount = 1
     currentNumber = long( 2 )
-    
+
     while currentCount < n:
         currentNumber += 1
         if isPrime( currentNumber ):
             currentCount += 1
-    
+
     return currentNumber
 
 def main():

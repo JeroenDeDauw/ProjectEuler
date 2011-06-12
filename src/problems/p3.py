@@ -9,15 +9,18 @@ Created on June 8, 2011
 http://projecteuler.net/index.php?section=problems&id=3
 '''
 
-def isPrime( number ):
-    for divisor in range( 2, number ):
-        if number % divisor == 0:
-            False
-    return True
+from Crypto.Util.number import isPrime
+
+#def isPrime( number ):
+#    for divisor in range( 2, number ):
+#        if number % divisor == 0:
+#            False
+#    return True
 
 def getNextPrime( lowerBound ):
     ''' Lower bound not included '''
     nextPrime = 0
+    lowerBound = long( lowerBound )
 
     while nextPrime == 0:
         lowerBound += 1
