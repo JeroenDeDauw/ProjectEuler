@@ -10,17 +10,29 @@ http://projecteuler.net/index.php?section=problems&id=8
 '''
 
 def findGreatestProduct( haystack ):
-    for biggestMultiplier in reversed( range( 4, 9 + 1 ) ):
-        multipliers = range( biggestMultiplier - 5 + 1, biggestMultiplier + 1 )
+#    # The solution when you wrongly interpret the question :) 
+# 
+#    for biggestMultiplier in reversed( range( 4, 9 + 1 ) ):
+#        multipliers = range( biggestMultiplier - 5 + 1, biggestMultiplier + 1 )
+#
+#        product = 1
+#        for multiplier in multipliers:
+#            product *= multiplier
+#
+#        if str( product ) in haystack:
+#            return product
+#        
+#        return 0
 
-        product = 1
-        for multiplier in multipliers:
-            product *= multiplier
+    greatestProduct = 0
 
-        if str( product ) in haystack:
-            return product
+    for i in range( 0, len( haystack ) - 5 ):
+        product = reduce( lambda x, y: x * y, [ int( number ) for number in haystack[i: i + 5] ] )
 
-    return False
+        if product > greatestProduct:
+            greatestProduct = product
+
+    return greatestProduct
 
 def euler8():
     haystack = \
