@@ -12,6 +12,25 @@ http://projecteuler.net/index.php?section=problems&id=10
 from timeit import Timer
 from p3 import getNextPrime
 
+#def prime_sieve(limit):
+#        """Sieve of Atkin implmentation,
+#        finds primes < limit.
+#        It works by popping off prime numbers from the
+#        head of a list, and removing all multiples of that prime.
+#        
+#        For optimization purposes, the sieve stops at sqrt(limit),
+#        the remaining list is all primes.
+#        """
+#        pots = range(2, limit+1)
+#        l = math.sqrt(limit)
+#        p = 0
+#        while p < l:
+#                p = pots.pop(0)
+#                yield p
+#                pots = [i for i in pots if i%p != 0]
+#        for i in pots:
+#                yield i
+
 def sumOfPrimesInRange( lowerBound, upperBound ):
     '''
     Upper bound not included.
