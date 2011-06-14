@@ -11,8 +11,12 @@ http://projecteuler.net/index.php?section=problems&id=11
 
 from timeit import Timer
 
+ROW_SIZE = 20
+COL_SIZE = 20
+SET_SIZE = 4
+
 def getGrid():
-    return [
+    grid = [
         8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8,
         49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0,
         81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30, 3, 49, 13, 36, 65,
@@ -35,8 +39,31 @@ def getGrid():
         1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48
     ]
 
+    return [grid[i * ROW_SIZE: ( i + 1 ) * ROW_SIZE] for i in xrange( 0, COL_SIZE )]
+
 def euler11():
-    print getGrid()
+    grid = getGrid()
+
+    # You can only mutate, not reassign, to vars a scope up in Python <3.
+    # So let's use a list with length one - for great justice!
+    biggestProduct = [0]
+
+    def handleSet( numbers ):
+        product = reduce( lambda x, y: x * y, numbers )
+        if product > biggestProduct[0]:
+            biggestProduct[0] = product
+
+    # Loop through the rows, find horizontal matches.
+    for rowNr in range( 0, COL_SIZE ):
+        for colNr in range( 0, ROW_SIZE - SET_SIZE ):
+            handleSet( grid[rowNr][colNr : colNr + SET_SIZE] )
+
+    # Loop through the columns, find vertical matches.
+    for colNr in range( 0, ROW_SIZE ):
+        for rowNr in range( 0, COL_SIZE - SET_SIZE ):
+            handleSet( grid[colNr][rowNr : rowNr + SET_SIZE] )
+
+    print biggestProduct[0]
 
 def main():
     t = Timer( 'euler11()', "from __main__ import euler11" )
