@@ -53,15 +53,36 @@ def euler11():
         if product > biggestProduct[0]:
             biggestProduct[0] = product
 
+    def handleDiagonal( numbers ):
+        for i in xrange( 0, len( numbers ) - SET_SIZE ):
+            handleSet( numbers[i : i + SET_SIZE] )
+
     # Loop through the rows, find horizontal matches.
-    for rowNr in range( 0, COL_SIZE ):
-        for colNr in range( 0, ROW_SIZE - SET_SIZE ):
+    for rowNr in xrange( 0, COL_SIZE ):
+        for colNr in xrange( 0, ROW_SIZE - SET_SIZE ):
             handleSet( grid[rowNr][colNr : colNr + SET_SIZE] )
 
     # Loop through the columns, find vertical matches.
-    for colNr in range( 0, ROW_SIZE ):
-        for rowNr in range( 0, COL_SIZE - SET_SIZE ):
-            handleSet( grid[colNr][rowNr : rowNr + SET_SIZE] )
+    for colNr in xrange( 0, ROW_SIZE ):
+        for rowNr in xrange( 0, COL_SIZE - SET_SIZE ):
+            set = []
+            for cellRowNr in xrange( rowNr, rowNr + SET_SIZE ):
+                set.append( grid[cellRowNr][colNr] )
+
+            handleSet( set )
+
+    # Loop through diagonals, right top to left bottom.
+    for colNr in range( SET_SIZE - 1, ROW_SIZE ):
+        diagonal = []
+        cellRowNr = 0
+
+        for cellColNr in reversed( range( 0, colNr + 1 ) ):
+            if cellRowNr >= COL_SIZE:
+                break;
+            diagonal.append( grid[cellRowNr][cellColNr] )
+            cellRowNr += 1
+        print diagonal
+        handleDiagonal( diagonal )
 
     print biggestProduct[0]
 
