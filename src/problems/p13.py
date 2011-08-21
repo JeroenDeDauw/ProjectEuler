@@ -120,8 +120,7 @@ def getNumbers():
     return [long( x[:digitCount] ) for x in NUMBERS]
 
 def euler13():
-    numbers = getNumbers()
-
+    print str( sum( getNumbers() ) )[:DIGIT_COUNT]
 
 def main():
     t = Timer( 'euler13()', "from __main__ import euler13" )
