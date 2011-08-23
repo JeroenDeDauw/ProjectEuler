@@ -116,7 +116,7 @@ NUMBERS = ['37107287533902102798797998220837590246510135740250',
 
 def getNumbers():
     fewestDigits = min( [ len( x ) for x in NUMBERS ] )
-    digitCount = int( min( fewestDigits, DIGIT_COUNT + 1 + ceil( log( len( NUMBERS ), 10 ) ) ) )
+    digitCount = int( min( fewestDigits, DIGIT_COUNT ) )
     return [long( x[:digitCount] ) for x in NUMBERS]
 
 def euler13():
